@@ -1,0 +1,67 @@
+% Custom Commands for Technikum Theme
+% Helper commands and utilities
+
+% Helper command for text with shadow/border (circular method)
+% Usage:
+%   \shadowedtext[main styles][shadow overrides][offset]{text}
+%   \shadowedtext[main styles][shadow overrides][offset]{text}(label)
+%
+% Parameters:
+%   #1 = styles applied to both shadow and main text (e.g., font, color, at={...}, below=of node)
+%   #2 = styles that override #1 for shadow nodes only (e.g., text=red for different shadow color)
+%   #3 = shadow offset/thickness (default: .5pt)
+%   #4 = text content
+%   #5 = optional label (in parentheses)
+%
+% Examples:
+%   \shadowedtext[at={(0,0)}]{Title}
+%   \shadowedtext[font=\Large, at={(0,0)}]{Big Title}(title-label)
+%   \shadowedtext[font=\Large, text=yellow, below=of logo][text=red][1pt]{Subtitle}(subtitle)
+%   \shadowedtext[anchor=north, at={([yshift=-2em] current page.north)}]{Centered Title}
+%
+\NewDocumentCommand{\shadowedtext}{O{} O{} O{.5pt} m D(){}}{% 
+    % #1 = main styles (including position), #2 = shadow overrides, #3 = offset
+    % #4 = text content, #5 = optional label
+    \foreach \angle in {0,5,...,359}{%
+            \node[text=black, #1, #2, shift={(\angle:#3)},draw=none, fill=none] {#4};%
+        }%
+    \node[text=white, #1] (#5) {#4};%
+}
+
+% Helper command for checking and setting background presets
+% Usage (internal):
+%   \checkbg{preset-name}{filename.jpg}
+%
+% Compares \temp with preset-name and sets \inserttitlebackground if matched
+\def\checkbg#1#2{%
+    \def\bgname{#1}%
+    \ifx\temp\bgname
+        \def\inserttitlebackground{assets/images/title/#2}%
+    \fi
+}
+
+% Helper command to set a coordinate to the first defined node from a list
+% Usage:
+%   \setfirstdefined{varname}{node1,node2,node3,...}
+%
+% Sets \varname to the first node from the comma-separated list that is defined (exists)
+% If no nodes exist, sets it to the last item in the list (fallback)
+%
+% Examples:
+%   \setfirstdefined{authoranchor}{subtitle,title,current page.center}
+%   % Then use: below=of \authoranchor
+%
+\newcommand{\setfirstdefined}[2]{%
+    \def\tempresult{}%
+    \foreach \nodename in {#2}{%
+            \ifx\tempresult\@empty
+                \ifcsname pgf@sh@ns@\nodename\endcsname
+                    \xdef#1{\nodename}%
+                    \xdef\tempresult{found}%
+                \else
+                    \xdef#1{\nodename}% Keep updating as fallback
+                \fi
+            \fi
+        }%
+}
+

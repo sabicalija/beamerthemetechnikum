@@ -1,0 +1,41 @@
+% Beamer Theme Options for Technikum
+% Defines all theme options and their defaults
+
+% ---- Title page options ----
+\DeclareOptionBeamer{title-style}{\def\beamer@technikum@title{#1}}
+\DeclareOptionBeamer{title-background}{\def\beamer@technikum@background{#1}}
+
+% Title page toggles
+\newif\ifbeamer@technikum@showlogo
+\newif\ifbeamer@technikum@showtitle
+\newif\ifbeamer@technikum@showsubtitle
+\newif\ifbeamer@technikum@showauthor
+\newif\ifbeamer@technikum@showemail
+\newif\ifbeamer@technikum@showinstitute
+\newif\ifbeamer@technikum@showdate
+
+\DeclareOptionBeamer{title-logo}{\csname beamer@technikum@showlogo#1\endcsname}
+\DeclareOptionBeamer{title-title}{\csname beamer@technikum@showtitle#1\endcsname}
+\DeclareOptionBeamer{title-subtitle}{\csname beamer@technikum@showsubtitle#1\endcsname}
+\DeclareOptionBeamer{title-author}{\csname beamer@technikum@showauthor#1\endcsname}
+\DeclareOptionBeamer{title-email}{\csname beamer@technikum@showemail#1\endcsname}
+\DeclareOptionBeamer{title-institute}{\csname beamer@technikum@showinstitute#1\endcsname}
+\DeclareOptionBeamer{title-date}{\csname beamer@technikum@showdate#1\endcsname}
+
+% Title logo position
+\DeclareOptionBeamer{title-logo-pos}{\def\beamer@technikum@logopos{#1}}
+
+% Set defaults
+\ExecuteOptionsBeamer{%
+    title-style=centered,%
+    title-logo=true,%
+    title-logo-pos=north east,%
+    title-title=true,%
+    title-subtitle=true,%
+    title-author=true,%
+    title-email=true,%
+    title-institute=true,%
+    title-date=true%
+}
+
+\ProcessOptionsBeamer\relax
