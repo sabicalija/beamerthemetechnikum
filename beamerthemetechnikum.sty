@@ -1,6 +1,18 @@
 % Beamer Theme Technikum
 % Main theme file for Fachhochschule Technikum Wien
-\ProvidesPackage{beamerthemetechnikum}[2025/11/03 Technikum Beamer Theme]
+
+\mode<presentation>
+
+% Load dependencies
+\RequirePackage{tikz}
+\RequirePackage{ifthen}
+\usetikzlibrary{positioning}
+
+% Load theme options
+\input{utils/options.sty}
+
+% Load custom commands
+\input{utils/commands.sty}
 
 % Load component themes
 \usecolortheme{technikum}
