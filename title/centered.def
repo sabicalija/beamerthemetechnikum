@@ -1,0 +1,52 @@
+% Title page variant: centered
+% Simple centered layout for all content
+\defbeamertemplate{title page}{centered}
+{
+    \begin{tikzpicture}[remember picture, overlay, every node/.style={anchor=center}]
+        % Title
+        \node (title) at (current page.center) {
+            \usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle
+        };
+        
+        % Subtitle
+        \ifx\insertsubtitle\@empty\else
+            \node[below=0.5em of title] (subtitle) {
+                \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle
+            };
+        \fi
+        
+        % Author
+        \ifx\insertsubtitle\@empty
+            \node[below=2em of title] (author) {
+                \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor
+            };
+        \else
+            \node[below=2em of subtitle] (author) {
+                \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor
+            };
+        \fi
+        
+        % Email
+        \ifx\insertemail\@empty\else
+            \node[below=0.3em of author] (email) {
+                \usebeamerfont{author}\usebeamercolor[fg]{author}\small\insertemail
+            };
+        \fi
+        
+        % Institute
+        \ifx\insertemail\@empty
+            \node[below=1em of author] (institute) {
+                \usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute
+            };
+        \else
+            \node[below=1em of email] (institute) {
+                \usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute
+            };
+        \fi
+        
+        % Date
+        \node[below=1em of institute] (date) {
+            \usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate
+        };
+    \end{tikzpicture}
+}

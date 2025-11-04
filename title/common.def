@@ -1,0 +1,196 @@
+% Common definitions for all title page variants
+% Shared dimensions and styles that can be used across all variants
+
+% ---- Title page layout dimensions ----
+\newlength{\beamer@technikum@textshadow}
+
+% Logo
+\newlength{\beamer@technikum@logowidth}
+\newlength{\beamer@technikum@logoxsep}
+\newlength{\beamer@technikum@logoysep}
+\newlength{\beamer@technikum@logoyshift}
+\newlength{\beamer@technikum@logoxshift}
+
+% Title
+\newlength{\beamer@technikum@titlewidth}
+\newlength{\beamer@technikum@titleheight}
+\newlength{\beamer@technikum@titlexsep}
+\newlength{\beamer@technikum@titleysep}
+\newlength{\beamer@technikum@titleyshift}
+
+% Subtitle
+\newlength{\beamer@technikum@subtitlewidth}
+\newlength{\beamer@technikum@subtitleheight}
+\newlength{\beamer@technikum@subtitlexsep}
+\newlength{\beamer@technikum@subtitleysep}
+\newlength{\beamer@technikum@subtitleyshift}
+
+% Author
+\newlength{\beamer@technikum@authorwidth}
+\newlength{\beamer@technikum@authorheight}
+\newlength{\beamer@technikum@authorxsep}
+\newlength{\beamer@technikum@authorysep}
+\newlength{\beamer@technikum@authoryshift}
+
+% Email
+\newlength{\beamer@technikum@emailwidth}
+\newlength{\beamer@technikum@emailheight}
+\newlength{\beamer@technikum@emailxsep}
+\newlength{\beamer@technikum@emailysep}
+\newlength{\beamer@technikum@emailyshift}
+
+% Institute
+\newlength{\beamer@technikum@institutewidth}
+\newlength{\beamer@technikum@instituteheight}
+\newlength{\beamer@technikum@institutexsep}
+\newlength{\beamer@technikum@instituteysep}
+\newlength{\beamer@technikum@instituteyshift}
+
+% Date
+\newlength{\beamer@technikum@datewidth}
+\newlength{\beamer@technikum@dateheight}
+\newlength{\beamer@technikum@datexsep}
+\newlength{\beamer@technikum@dateysep}
+\newlength{\beamer@technikum@dateyshift}
+\newlength{\beamer@technikum@datexshift}
+
+% ---- Default dimension values ----
+\setlength{\beamer@technikum@textshadow}{0.75pt}
+
+% Logo
+\setlength{\beamer@technikum@logowidth}{0.3\paperwidth}
+\setlength{\beamer@technikum@logoxsep}{2em}
+\setlength{\beamer@technikum@logoysep}{0.375em}
+\setlength{\beamer@technikum@logoyshift}{0em}
+\setlength{\beamer@technikum@logoxshift}{0em}
+
+
+% Title
+\setlength{\beamer@technikum@titlewidth}{0.7\paperwidth}
+\setlength{\beamer@technikum@titleheight}{1.5em}
+\setlength{\beamer@technikum@titlexsep}{2em}
+\setlength{\beamer@technikum@titleysep}{0.7em}
+\setlength{\beamer@technikum@titleyshift}{0em}
+
+% Subtitle
+\setlength{\beamer@technikum@subtitlewidth}{0.7\paperwidth}
+\setlength{\beamer@technikum@subtitleheight}{1.5em}
+\setlength{\beamer@technikum@subtitlexsep}{2em}
+\setlength{\beamer@technikum@subtitleysep}{0.45em}
+\setlength{\beamer@technikum@subtitleyshift}{0em}
+
+% Author
+\setlength{\beamer@technikum@authorwidth}{0.5\paperwidth}
+\setlength{\beamer@technikum@authorheight}{1em}
+\setlength{\beamer@technikum@authorxsep}{2em}
+\setlength{\beamer@technikum@authorysep}{0.5em}
+\setlength{\beamer@technikum@authoryshift}{0em}
+
+% Email
+\setlength{\beamer@technikum@emailwidth}{0.5\paperwidth}
+\setlength{\beamer@technikum@emailheight}{1em}
+\setlength{\beamer@technikum@emailxsep}{2em}
+\setlength{\beamer@technikum@emailysep}{0.5em}
+\setlength{\beamer@technikum@emailyshift}{0em}
+
+% Institute
+\setlength{\beamer@technikum@institutewidth}{0.65\paperwidth}
+\setlength{\beamer@technikum@instituteheight}{1em}
+\setlength{\beamer@technikum@institutexsep}{2em}
+\setlength{\beamer@technikum@instituteysep}{0.5em}
+\setlength{\beamer@technikum@instituteyshift}{0em}
+
+% Date
+\setlength{\beamer@technikum@datewidth}{0.35\paperwidth}
+\setlength{\beamer@technikum@dateheight}{1em}
+\setlength{\beamer@technikum@datexsep}{2em}
+\setlength{\beamer@technikum@dateysep}{0.5em}
+\setlength{\beamer@technikum@dateyshift}{0em}
+\setlength{\beamer@technikum@datexshift}{0em}
+
+% ---- Title page TikZ styles ----
+\tikzset{
+    title page element/.style={%
+            % draw=white,
+            inner sep=0pt,
+            outer sep=0pt,
+            text depth=0pt,
+        },
+    title page logo/.style={%
+            title page element,
+            opacity=\ifbeamer@technikum@showlogo 1\else 0\fi,
+            text width=\dimexpr\beamer@technikum@logowidth-2\beamer@technikum@logoxsep\relax,
+            minimum width=\beamer@technikum@logowidth,
+            inner ysep=\beamer@technikum@logoysep,
+            inner xsep=\beamer@technikum@logoxsep,
+            yshift=\beamer@technikum@logoyshift,
+            xshift=\beamer@technikum@logoxshift,
+        },
+    title page title/.style={%
+            title page element,
+            font=\usebeamerfont{title},
+            opacity=\ifbeamer@technikum@showtitle 1\else 0\fi,
+            text width=\dimexpr\beamer@technikum@titlewidth-2\beamer@technikum@titlexsep\relax,
+            minimum width=\beamer@technikum@titlewidth,
+            minimum height=\beamer@technikum@titleheight,
+            inner ysep=\beamer@technikum@titleysep,
+            inner xsep=\beamer@technikum@titlexsep,
+            yshift=\beamer@technikum@titleyshift,
+        },
+    title page subtitle/.style={%
+            title page element,
+            font=\usebeamerfont{subtitle},
+            opacity=\ifbeamer@technikum@showsubtitle 1\else 0\fi,
+            text width=\dimexpr\beamer@technikum@subtitlewidth-2\beamer@technikum@subtitlexsep\relax,
+            minimum width=\beamer@technikum@subtitlewidth,
+            minimum height=\beamer@technikum@subtitleheight,
+            inner ysep=\beamer@technikum@subtitleysep,
+            inner xsep=\beamer@technikum@subtitlexsep,
+            yshift=\beamer@technikum@subtitleyshift,
+        },
+    title page author/.style={%
+            title page element,
+            font=\usebeamerfont{author},
+            opacity=\ifbeamer@technikum@showauthor 1\else 0\fi,
+            text width=\dimexpr\beamer@technikum@authorwidth-2\beamer@technikum@authorxsep\relax,
+            minimum width=\beamer@technikum@authorwidth,
+            minimum height=\beamer@technikum@authorheight,
+            inner ysep=\beamer@technikum@authorysep,
+            inner xsep=\beamer@technikum@authorxsep,
+            yshift=\beamer@technikum@authoryshift,
+        },
+    title page email/.style={%
+            title page author,
+            font=\usebeamerfont{email},
+            opacity=\ifbeamer@technikum@showemail 1\else 0\fi,
+            text width=\dimexpr\beamer@technikum@emailwidth-2\beamer@technikum@emailxsep\relax,
+            minimum width=\beamer@technikum@emailwidth,
+            minimum height=\beamer@technikum@emailheight,
+            inner ysep=\beamer@technikum@emailysep,
+            inner xsep=\beamer@technikum@emailxsep,
+            yshift=\beamer@technikum@emailyshift,
+        },
+    title page institute/.style={%
+            title page author,
+            font=\usebeamerfont{institute},
+            opacity=\ifbeamer@technikum@showinstitute 1\else 0\fi,
+            text width=\dimexpr\beamer@technikum@institutewidth-2\beamer@technikum@institutexsep\relax,
+            minimum width=\beamer@technikum@institutewidth,
+            minimum height=\beamer@technikum@instituteheight,
+            inner ysep=\beamer@technikum@instituteysep,
+            inner xsep=\beamer@technikum@institutexsep,
+            yshift=\beamer@technikum@instituteyshift,
+        },
+    title page date/.style={%
+            title page author,
+            font=\usebeamerfont{date},
+            opacity=\ifbeamer@technikum@showdate 1\else 0\fi,
+            text width=\dimexpr\beamer@technikum@datewidth-2\beamer@technikum@datexsep\relax,
+            minimum width=\beamer@technikum@datewidth,
+            minimum height=\beamer@technikum@dateheight,
+            inner ysep=\beamer@technikum@dateysep,
+            inner xsep=\beamer@technikum@datexsep,
+            yshift=\beamer@technikum@dateyshift,
+            xshift=\beamer@technikum@datexshift,
+        },
+}

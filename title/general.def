@@ -1,0 +1,56 @@
+% Title page variant: general
+% Simple general layout for all content with complex backgrounds
+\defbeamertemplate{title page}{general}
+{
+    \begin{tikzpicture}[remember picture, overlay]
+        \useasboundingbox (0,0) rectangle(\paperwidth,\paperheight);
+
+        % Create 2 coordinates for positioning
+        \coordinate (main) at (0,3.25);
+        \coordinate (sub) at (0,-2.5);
+
+        % Background image
+        \ifdefempty{\inserttitlebackground}{}{%
+            \node[anchor=center] at (current page.center) {
+                \includegraphics[width=\paperwidth,height=\paperheight]{\inserttitlebackground}
+            };
+        }
+
+        % Logo
+        \ifbeamer@technikum@showlogo
+            \node[title page logo, anchor=north east, at=(current page.east |- main)] {
+                \includegraphics[width=\dimexpr\beamer@technikum@logowidth-2\beamer@technikum@logoxsep, keepaspectratio]{assets/images/logo.pdf}
+            };
+        \fi
+
+        % Title
+        \shadowedtext[title page title, anchor=north west, at=(current page.west |- main)][][\beamer@technikum@textshadow]{%
+            \ifbeamer@technikum@showtitle\inserttitle\fi
+        }(title)
+
+        % Subtitle
+        \shadowedtext[title page subtitle, anchor=north west, at=(current page.west |- title.south)][][\beamer@technikum@textshadow]{%
+            \ifbeamer@technikum@showsubtitle\insertsubtitle\fi
+        }(subtitle)
+
+        % Author
+        \shadowedtext[title page author, anchor=north west, at={(current page.west |- sub)}][][\beamer@technikum@textshadow]{%
+            \ifbeamer@technikum@showauthor\insertauthor\fi
+        }(author)
+
+        % Email
+        \shadowedtext[title page email, anchor=north west, at={(current page.west |- author.south)}][][\beamer@technikum@textshadow]{%
+            \ifbeamer@technikum@showemail\small\insertemail\fi
+        }(email)
+
+        % Institute
+        \shadowedtext[title page institute, anchor=north west, at={(current page.west |- email.south)}][][\beamer@technikum@textshadow]{%
+            \ifbeamer@technikum@showinstitute\insertinstitute\fi
+        }(institute)
+
+        % Date
+        \shadowedtext[title page date, anchor=north east, at={(current page.east |- email.south)}, align=right][][\beamer@technikum@textshadow]{%
+            \ifbeamer@technikum@showdate\insertdate\fi
+        }(date)
+    \end{tikzpicture}
+}
