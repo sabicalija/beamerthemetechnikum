@@ -4,12 +4,61 @@
 
 \mode<presentation>
 
-% TODO: Customize fonts as needed
-% Example:
-% \setbeamerfont{title}{size=\Large,series=\bfseries}
-% \setbeamerfont{subtitle}{size=\large}
-% etc.
+% ---- Font setup (fontspec for XeLaTeX) ----
+\RequirePackage{fontspec}
 
-% Placeholder: use default Beamer fonts for now
+
+% Main font (serif)
+% For serif text
+\setmainfont{Noto Serif}
+% \setmainfont{DejaVu Serif} % classic
+% \setmainfont{Georgia} % readable serif
+% \setmainfont{Latin Modern Roman} % LaTeX default, professional
+
+% Sans-serif font (Beamer default for presentations)
+% Main presentation font
+\setsansfont{Noto Sans} % modern, comprehensive
+% \setsansfont{DejaVu Sans} % clean, readable
+% \setsansfont{Arial} % classic
+% \setsansfont{Ubuntu Sans} % modern, friendly
+
+% Monospace font
+% For code
+\setmonofont{Noto Sans Mono} % clean
+% \setmonofont{DejaVu Sans Mono} % very readable
+% \setmonofont{Courier New} % classic
+% \setmonofont{Ubuntu Mono} % modern
+
+% Set sans as default for presentation
+\renewcommand{\familydefault}{\sfdefault}
+
+% ---- Title page fonts ----
+% Using \fontsize{size}{baseline skip} for precise control
+\setbeamerfont{title}{size=\fontsize{14}{14}\selectfont, series=\bfseries}
+\setbeamerfont{subtitle}{size=\fontsize{12}{12}\selectfont}
+\setbeamerfont{author}{size=\fontsize{12}{12}\selectfont}
+\setbeamerfont{email}{size=\fontsize{12}{12}\selectfont}
+\setbeamerfont{institute}{size=\fontsize{12}{12}\selectfont}
+\setbeamerfont{date}{size=\fontsize{12}{12}\selectfont}
+
+% ---- Frame title fonts ----
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\setbeamerfont{framesubtitle}{size=\large}
+
+% ---- Block fonts ----
+\setbeamerfont{block title}{size=\normalsize, series=\bfseries}
+\setbeamerfont{block body}{size=\small}
+
+% ---- Item fonts ----
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\small}
+\setbeamerfont{itemize/enumerate subsubbody}{size=\footnotesize}
+
+% ---- Caption fonts ----
+\setbeamerfont{caption}{size=\small}
+\setbeamerfont{caption name}{series=\bfseries}
+
+% ---- Footer fonts ----
+\setbeamerfont{footline}{size=\tiny}
 
 \mode<all>
