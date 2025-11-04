@@ -1,46 +1,55 @@
 % Beamer Inner Theme Technikum
 % Defines inner elements: title page, lists, blocks, etc.
-\ProvidesPackage{beamerinnerthemetechnikum}[2025/11/03 Technikum Inner Theme]
-
 \mode<presentation>
 
+% ---- Spacing and layout lengths ----
+% Paragraph spacing
+\setlength{\parskip}{0.5em plus 0.2em minus 0.1em}  % Space between paragraphs
+\setlength{\parindent}{0pt}                          % No paragraph indentation
+
+% Item spacing (list environments)
+\setlength{\itemsep}{0.3em plus 0.2em minus 0.1em}  % Space between items
+
+% Block spacing
+\setbeamersize{text margin left=1em}   % Left margin
+\setbeamersize{text margin right=1em}  % Right margin
+
+% ---- Custom commands ----
 % Custom command for email
 \newcommand{\email}[1]{\def\insertemail{#1}}
 \newcommand{\insertemail}{}  % Initialize empty
 
-% Title page template
-\defbeamertemplate*{title page}{technikum}[1][]
-{
-    \vbox{}
-    \vfill
-    \begingroup
-    \centering
-    \begin{beamercolorbox}[sep=8pt,center,#1]{title}
-        \usebeamerfont{title}\inserttitle\par%
-        \ifx\insertsubtitle\@empty%
-        \else%
-            \vskip0.25em%
-            {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-        \fi%     
-    \end{beamercolorbox}%
-    \vskip1em\par
-    \begin{beamercolorbox}[sep=8pt,center,#1]{author}
-        \usebeamerfont{author}\insertauthor
-    \end{beamercolorbox}
-    \ifx\insertemail\@empty%
-    \else%
-        \begin{beamercolorbox}[sep=8pt,center,#1]{author}
-            \usebeamerfont{author}\small\insertemail
-        \end{beamercolorbox}
-    \fi%
-    \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
-        \usebeamerfont{institute}\insertinstitute
-    \end{beamercolorbox}
-    \begin{beamercolorbox}[sep=8pt,center,#1]{date}
-        \usebeamerfont{date}\insertdate
-    \end{beamercolorbox}\vskip0.5em
-    \endgroup
-    \vfill
+% Custom command for title page background
+\newcommand{\inserttitlebackground}{}  % Initialize empty
+
+% Process background option (set by main theme)
+\@ifundefined{beamer@technikum@background}{}{%
+    \edef\temp{\beamer@technikum@background}%
+    \checkbg{noir}{noir.jpg}%
+    \checkbg{noir-bridge}{noir-bridge.jpg}%
+    \checkbg{noir-bridge-color}{noir-bridge-color.jpg}%
+    \checkbg{light}{light.jpg}%
+    \checkbg{abstract}{abstract.png}%
+    \checkbg{cyber}{cyber.jpg}%
+    % If no preset matched, use the value as a direct path
+    \ifx\inserttitlebackground\@empty
+        \expandafter\def\expandafter\inserttitlebackground\expandafter{\beamer@technikum@background}%
+    \fi
 }
+
+% Load common title page definitions (shared dimensions and styles)
+\input{title/common.def}
+
+% Load title page variants
+\input{title/general.def}
+\input{title/centered.def}
+\input{title/split.def}
+
+% Set the chosen variant as the active title page
+\ifx\beamer@technikum@title\@empty
+    \setbeamertemplate{title page}[general]
+\else
+    \expandafter\setbeamertemplate\expandafter{title page}[\beamer@technikum@title]
+\fi
 
 \mode<all>
