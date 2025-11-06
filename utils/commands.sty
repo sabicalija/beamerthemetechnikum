@@ -23,9 +23,9 @@
     % #1 = main styles (including position), #2 = shadow overrides, #3 = offset
     % #4 = text content, #5 = optional label
     \foreach \angle in {0,5,...,359}{%
-            \node[text=black, #1, #2, shift={(\angle:#3)},draw=none, fill=none] {#4};%
+            \node[text=bg, #1, #2, shift={(\angle:#3)},draw=none, fill=none] {#4};%
         }%
-    \node[text=white, #1] (#5) {#4};%
+    \node[text=fg, #1] (#5) {#4};%
 }
 
 % Helper command for checking and setting background presets
