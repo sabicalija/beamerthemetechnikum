@@ -2,47 +2,123 @@
 % Defines inner elements: title page, lists, blocks, etc.
 \mode<presentation>
 
-\usepackage{stmaryrd}
+% =============================================================================
+% SPACING CONFIGURATION
+% =============================================================================
+% All spacing values use flexible glue: {natural} plus {stretch} minus {shrink}
+% This allows LaTeX to optimize layout while maintaining visual consistency
 
-% ---- Spacing and layout lengths ----
-% Paragraph spacing
+\makeatletter
+
+% ---- Global paragraph spacing ----
 \setlength{\parskip}{0.5em plus 0.2em minus 0.1em}  % Space between paragraphs
-\setlength{\parindent}{0pt}                         % No paragraph indentation
+\setlength{\parindent}{0pt}                          % No paragraph indentation
 
-% Item spacing (list environments)
+% ---- List spacing (itemize/enumerate) ----
+% Default spacing for all lists
 \setlength{\itemsep}{0.3em plus 0.2em minus 0.1em}  % Space between items
 
-% ---- Itemize bullet symbols ----
-\setbeamertemplate{itemize item}{%
-    \usebeamercolor{itemize item}
-    \begin{tikzpicture}[remember picture, overlay]%
-        \node [fill=fg, regular polygon, regular polygon sides=5, minimum size=0.6em, yshift=0.35em, xshift=-0.4ex, rotate=-90, anchor=center, inner sep=0pt] {};
-    \end{tikzpicture}%
+% Level-specific list spacing
+\def\@listi{%
+    \leftmargin\leftmargini
+    \parsep 0pt                                      % No extra space between paragraphs in items
+    \topsep 0.3em plus 0.2em minus 0.1em            % Space before/after list
+    \itemsep 0.4em plus 0.2em minus 0.1em           % Space between 1st level items
 }
-\setbeamertemplate{itemize subitem}{%
-    \usebeamercolor{itemize subitem}
-    \begin{tikzpicture}[remember picture, overlay]%
-        \node [fill=fg, regular polygon, regular polygon sides=4, minimum size=0.65em, yshift=0.35em, xshift=-0.4ex, rotate=-90, anchor=center, inner sep=0pt] {};
-    \end{tikzpicture}%
+\def\@listii{%
+    \leftmargin\leftmarginii
+    \parsep 0pt
+    \topsep 0.2em                                    % Space before/after nested list
+    \itemsep 0.5em plus 0.3em minus 0.1em           % Space between 2nd level items (increased)
 }
-\setbeamertemplate{itemize subsubitem}{%
-    \usebeamercolor{itemize subsubitem}
-    \begin{tikzpicture}[remember picture, overlay]%
-        \node [fill=fg, regular polygon, regular polygon sides=3, minimum size=0.675em, yshift=0.35em, xshift=-0.4ex, rotate=-90, anchor=center, inner sep=0pt] {};
-    \end{tikzpicture}%
+\def\@listiii{%
+    \leftmargin\leftmarginiii
+    \parsep 0pt
+    \topsep 0.2em
+    \itemsep 0.4em plus 0.2em minus 0.1em           % Space between 3rd level items
 }
 
-% Block spacing
+% Activate the list spacing definitions
+\let\@listI\@listi
+\@listi
+
+% Space before nested lists begin
+\setbeamertemplate{itemize/enumerate body begin}{}
+\setbeamertemplate{itemize/enumerate subbody begin}{\vspace{0.2em}}     % Before 2nd level
+\setbeamertemplate{itemize/enumerate subsubbody begin}{\vspace{0.2em}}  % Before 3rd level
+
+% ---- Block environment spacing ----
+% Space inside and around blocks (definition, theorem, example, etc.)
+\addtobeamertemplate{block begin}{}{%
+    \setlength{\parskip}{0.5em plus 0.2em minus 0.1em}      % Between paragraphs inside blocks
+    \setlength{\itemsep}{0.4em plus 0.2em minus 0.1em}      % Between items inside blocks
+    % Override list spacing for lists inside blocks
+    \def\@listi{%
+        \leftmargin\leftmargini
+        \parsep 0pt
+        \topsep 0.3em plus 0.2em minus 0.1em
+        \itemsep 0.6em plus 0.3em minus 0.1em               % 1st level in blocks
+    }%
+    \def\@listii{%
+        \leftmargin\leftmarginii
+        \parsep 0pt
+        \topsep 0.2em
+        \itemsep 0.6em plus 0.3em minus 0.1em               % 2nd level in blocks
+    }%
+    \def\@listiii{%
+        \leftmargin\leftmarginiii
+        \parsep 0pt
+        \topsep 0.2em
+        \itemsep 0.5em plus 0.2em minus 0.1em               % 3rd level in blocks
+    }%
+}
+\addtobeamertemplate{block end}{}{%
+    \vspace{0.5em plus 0.2em minus 0.1em}                   % After blocks
+}
+
+% ---- Frame margins ----
 \setbeamersize{text margin left=1em}   % Left margin
 \setbeamersize{text margin right=1em}  % Right margin
 
-% ---- Custom commands ----
+% =============================================================================
+% ITEMIZE BULLET SYMBOLS
+% =============================================================================
+
+\setbeamertemplate{itemize item}{%
+    \usebeamercolor{itemize item}%
+    \begin{tikzpicture}[remember picture, overlay]%
+        \node [fill=fg, regular polygon, regular polygon sides=5, minimum size=0.6em, yshift=0.35em, xshift=-0.4ex, rotate=-90, anchor=center, inner sep=0pt] {};%
+    \end{tikzpicture}%
+}
+
+\setbeamertemplate{itemize subitem}{%
+    \usebeamercolor{itemize subitem}%
+    \begin{tikzpicture}[remember picture, overlay]%
+        \node [fill=fg, regular polygon, regular polygon sides=4, minimum size=0.65em, yshift=0.35em, xshift=-0.4ex, rotate=-90, anchor=center, inner sep=0pt] {};%
+    \end{tikzpicture}%
+}
+
+\setbeamertemplate{itemize subsubitem}{%
+    \usebeamercolor{itemize subsubitem}%
+    \begin{tikzpicture}[remember picture, overlay]%
+        \node [fill=fg, regular polygon, regular polygon sides=3, minimum size=0.675em, yshift=0.35em, xshift=-0.4ex, rotate=-90, anchor=center, inner sep=0pt] {};%
+    \end{tikzpicture}%
+}
+
+% =============================================================================
+% CUSTOM COMMANDS
+% =============================================================================
+
 % Custom command for email
 \newcommand{\email}[1]{\def\insertemail{#1}}
 \newcommand{\insertemail}{}  % Initialize empty
 
 % Custom command for title page background
 \newcommand{\inserttitlebackground}{}  % Initialize empty
+
+% =============================================================================
+% TITLE PAGE BACKGROUND PROCESSING
+% =============================================================================
 
 % Process background option (set by main theme)
 \@ifundefined{beamer@technikum@background}{}{%
@@ -59,6 +135,10 @@
     \fi
 }
 
+% =============================================================================
+% TITLE PAGE TEMPLATES
+% =============================================================================
+
 % Load common title page definitions (shared dimensions and styles)
 \input{title/common.def}
 
@@ -73,5 +153,7 @@
 \else
     \expandafter\setbeamertemplate\expandafter{title page}[\beamer@technikum@title]
 \fi
+
+\makeatother
 
 \mode<all>
