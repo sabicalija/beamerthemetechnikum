@@ -4,6 +4,21 @@
 
 \mode<presentation>
 
+% =============================================================================
+% FOOTNOTE POSITIONING
+% =============================================================================
+% Ensure footnotes appear above navigation symbols and footline
+% The key is setting appropriate vertical spacing and beamer depth
+\setbeamertemplate{footnote}{%
+    \parindent 1em\noindent%
+    \raggedright
+    \hbox to 1.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
+}
+
+% Position footnote above footline by adjusting vertical space
+% This ensures footnotes don't overlap with navigation or footer elements
+\addtobeamertemplate{footnote}{}{\vspace{2ex}}
+
 % TODO: Customize frame elements
 % Example:
 % \setbeamertemplate{headline}{...}
