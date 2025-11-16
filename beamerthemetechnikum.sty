@@ -6,8 +6,7 @@
 % Load dependencies
 \RequirePackage{tikz}
 \RequirePackage{ifthen}
-\usetikzlibrary{positioning}
-\usetikzlibrary{shapes.geometric}
+\RequirePackage[european, siunitx]{circuitikz}
 
 % Load theme options
 \input{utils/options.sty}
@@ -20,5 +19,9 @@
 \usefonttheme{technikum}
 \useinnertheme{technikum}
 \useoutertheme{technikum}
+
+% Load TikZ and CircuiTikz configurations
+\input{utils/tikz-config.sty}
+\input{utils/circuitikz-config.sty}
 
 \mode<all>
