@@ -2,6 +2,10 @@
 % Defines outer elements: headers, footers, sidebars
 \ProvidesPackage{beamerouterthemetechnikum}[2025/11/03 Technikum Outer Theme]
 
+% Required packages for gradient fading
+\RequirePackage{tikz}
+\usetikzlibrary{fadings}
+
 \mode<presentation>
 
 % =============================================================================
@@ -19,13 +23,261 @@
 % This ensures footnotes don't overlap with navigation or footer elements
 \addtobeamertemplate{footnote}{}{\vspace{2ex}}
 
-% TODO: Customize frame elements
-% Example:
-% \setbeamertemplate{headline}{...}
-% \setbeamertemplate{footline}{...}
-% \setbeamertemplate{frametitle}{...}
-% etc.
+% =============================================================================
+% NAVIGATION SYMBOLS
+% =============================================================================
+% Control navigation symbols based on theme option
+\ifbeamer@technikum@navigation
+    % Keep default navigation symbols
+\else
+    % Hide navigation symbols
+    \setbeamertemplate{navigation symbols}{}
+\fi
 
-% Placeholder: use default Beamer outer theme for now
+% =============================================================================
+% FRAMETITLE
+% =============================================================================
+\ifbeamer@technikum@frametitle
+    \setbeamertemplate{frametitle}{%
+        \vskip0pt% Remove any top spacing
+        \nointerlineskip%
+        \hspace*{-\beamer@leftmargin}% Cancel out left margin
+        \begin{tikzpicture}
+            % Get colors from beamer color scheme
+            \usebeamercolor{frametitle}
+            \usebeamercolor{framesubtitle}
+
+            % Position frametitle text with its own background
+            \ifbeamer@technikum@frametitlegradient
+                % Use gradient fade for frametitle background
+                \node[
+                    anchor=north west,
+                    text width=\dimexpr\paperwidth-0.6cm\relax,
+                    draw=none,
+                    inner xsep=0.3cm,
+                    inner ysep=1.4ex,
+                    outer sep=0pt,
+                    align=flush left,
+                    text depth=0em,
+                    path fading=\beamer@technikum@frametitlegradientdirection,
+                    fill=frametitle.bg,
+                ] (frametitlenode) at (0, 0) {%
+                    \usebeamerfont{frametitle}%
+                    \usebeamercolor[fg]{frametitle}%
+                    \insertframetitle%
+                };
+            \else
+                % Solid background for frametitle
+                \node[
+                    anchor=north west,
+                    text width=\dimexpr\paperwidth-0.6cm\relax,
+                    fill=frametitle.bg,
+                    draw=none,
+                    inner xsep=0.3cm,
+                    inner ysep=1.4ex,
+                    outer sep=0pt,
+                    align=flush left,
+                    text depth=0em,
+                ] (frametitlenode) at (0, 0) {%
+                    \usebeamerfont{frametitle}%
+                    \usebeamercolor[fg]{frametitle}%
+                    \insertframetitle%
+                };
+            \fi
+
+            % Add logo if enabled
+            \ifbeamer@technikum@frametitlelogo
+                \node[
+                    anchor=north east,
+                    inner sep=0pt,
+                    outer sep=0pt
+                ] at (\dimexpr\paperwidth-0.3cm\relax, -5pt) {%
+                    \includegraphics[height=\beamer@technikum@logoheight]{assets/images/logo.pdf}%
+                };
+            \fi
+
+            % Add subtitle if it exists
+            \ifx\insertframesubtitle\@empty\else
+                % Measure frametitle node height to position subtitle correctly
+                \ifbeamer@technikum@framesubtitlegradient
+                    % Use gradient fade for framesubtitle background
+                    \path let \p1 = (current bounding box.south) in
+                    node[
+                            anchor=north west,
+                            text width=\dimexpr\paperwidth-0.6cm\relax,
+                            draw=none,
+                            inner xsep=0.3cm,
+                            inner ysep=1.4ex,
+                            outer sep=0pt,
+                            align=flush left,
+                            text depth=0em,
+                            path fading=\beamer@technikum@framesubtitlegradientdirection,
+                            fill=framesubtitle.bg,
+                        ] at (0, {\y1}) {%
+                            \usebeamerfont{framesubtitle}%
+                            \usebeamercolor[fg]{framesubtitle}%
+                            \insertframesubtitle%
+                        };
+                \else
+                    % Solid background for framesubtitle
+                    \path let \p1 = (current bounding box.south) in
+                    node[
+                            anchor=north west,
+                            text width=\dimexpr\paperwidth-0.6cm\relax,
+                            fill=framesubtitle.bg,
+                            draw=none,
+                            inner xsep=0.3cm,
+                            inner ysep=0ex,
+                            outer sep=0pt,
+                            align=flush left,
+                            text depth=0.7ex,
+                        ] at (0, {\y1+1pt}) {%
+                            \usebeamerfont{framesubtitle}%
+                            \usebeamercolor[fg]{framesubtitle}%
+                            \insertframesubtitle%
+                        };
+                \fi
+            \fi
+
+            % Optional separator line below frametitle/subtitle
+            \ifbeamer@technikum@frametitlerule
+                \usebeamercolor{frametitle rule}
+                % Draw at bottom of current bounding box
+                \ifbeamer@technikum@frametitlerulegradient
+                    % Use gradient fade for frametitle rule
+                    \fill[frametitle rule.fg, path fading=\beamer@technikum@frametitlerulegradientdirection]
+                    let \p1 = (current bounding box.south west),
+                    \p2 = (current bounding box.south east) in
+                    ({\x1+\beamer@technikum@frametitlerulemargin}, \y1)
+                    rectangle
+                    ({\x2-\beamer@technikum@frametitlerulemargin}, {\y1+\beamer@technikum@frametitlerulewidth});
+                \else
+                    % Solid color for frametitle rule
+                    \draw[color=frametitle rule.fg, line width=\beamer@technikum@frametitlerulewidth]
+                    let \p1 = (current bounding box.south west),
+                    \p2 = (current bounding box.south east) in
+                    ({\x1+\beamer@technikum@frametitlerulemargin}, \y1)
+                    -- ({\x2-\beamer@technikum@frametitlerulemargin}, \y2);
+                \fi
+            \fi
+        \end{tikzpicture}%
+        \vskip4pt plus 1pt minus 2pt%
+    }
+\fi
+
+% =============================================================================
+% FOOTLINE
+% =============================================================================
+\ifbeamer@technikum@footline
+    \setbeamertemplate{footline}{%
+        \ifnum\value{framenumber}>0% Only show if not title page
+            \ifbeamer@inappendix\else% Don't show in appendix
+                \vskip0pt%
+                \nointerlineskip%
+                % \hspace*{-\beamer@leftmargin}%
+                \begin{tikzpicture}
+                    % Get colors from beamer color scheme
+                    \usebeamercolor{footline background}
+                    \usebeamercolor{footline rule}
+                    \usebeamercolor{author in head/foot}
+                    \usebeamercolor{title in head/foot}
+                    \usebeamercolor{page number in head/foot}
+
+                    % Position footline content with background
+                    \ifbeamer@technikum@footlinegradient
+                        % Use gradient fade for footline background
+                        \node[
+                            anchor=south west,
+                            text width={\dimexpr\paperwidth-2em\relax},
+                            draw=none,
+                            inner xsep=1em,
+                            inner ysep=4pt,
+                            outer sep=0pt,
+                            path fading=\beamer@technikum@footlinegradientdirection,
+                            fill=footline background.bg,
+                        ] at ({-\beamer@leftmargin}, 0) {%
+                            \parbox[t]{.333333\dimexpr\paperwidth-2em\relax}{%
+                                \raggedright%
+                                \usebeamerfont{author in head/foot}%
+                                \usebeamercolor[fg]{author in head/foot}%
+                                \copyright~\insertshortauthor%
+                            }%
+                            \parbox[t]{.333333\dimexpr\paperwidth-2em\relax}{%
+                                \centering%
+                                \usebeamerfont{title in head/foot}%
+                                \usebeamercolor[fg]{title in head/foot}%
+                                \insertshorttitle%
+                            }%
+                            \parbox[t]{.333333\dimexpr\paperwidth-2em\relax}{%
+                                \raggedleft%
+                                \ifbeamer@technikum@footlinepagenumber
+                                    \usebeamerfont{page number in head/foot}%
+                                    \usebeamercolor[fg]{page number in head/foot}%
+                                    \insertframenumber\,/\,\inserttotalframenumber%
+                                \fi
+                            }%
+                        };
+                    \else
+                        % Solid background for footline
+                        \node[
+                            anchor=south west,
+                            text width={\dimexpr\paperwidth-2em\relax},
+                            fill=footline background.bg,
+                            draw=none,
+                            inner xsep=1em,
+                            inner ysep=4pt,
+                            outer sep=0pt,
+                        ] at ({-\beamer@leftmargin}, 0) {%
+                            \parbox[t]{.333333\dimexpr\paperwidth-2em\relax}{%
+                                \raggedright%
+                                \usebeamerfont{author in head/foot}%
+                                \usebeamercolor[fg]{author in head/foot}%
+                                \copyright~\insertshortauthor%
+                            }%
+                            \parbox[t]{.333333\dimexpr\paperwidth-2em\relax}{%
+                                \centering%
+                                \usebeamerfont{title in head/foot}%
+                                \usebeamercolor[fg]{title in head/foot}%
+                                \insertshorttitle%
+                            }%
+                            \parbox[t]{.333333\dimexpr\paperwidth-2em\relax}{%
+                                \raggedleft%
+                                \ifbeamer@technikum@footlinepagenumber
+                                    \usebeamerfont{page number in head/foot}%
+                                    \usebeamercolor[fg]{page number in head/foot}%
+                                    \insertframenumber\,/\,\inserttotalframenumber%
+                                \fi
+                            }%
+                        };
+                    \fi
+
+                    % Separator line at top of footline
+                    \ifbeamer@technikum@footlinerule
+                        \usebeamercolor{footline rule}
+                        \ifbeamer@technikum@footlinerulegradient
+                            % Use gradient fade for footline rule
+                            \fill[footline rule.fg, path fading=\beamer@technikum@footlinerulegradientdirection]
+                            let \p1 = (current bounding box.north west),
+                            \p2 = (current bounding box.north east) in
+                            ({\x1+\beamer@technikum@footlinerulemargin}, \y1)
+                            rectangle
+                            ({\x2-\beamer@technikum@footlinerulemargin}, {\y1+\beamer@technikum@footlinerulewidth});
+                        \else
+                            % Solid color for footline rule
+                            \draw[color=footline rule.fg, line width=\beamer@technikum@footlinerulewidth]
+                            let \p1 = (current bounding box.north west),
+                            \p2 = (current bounding box.north east) in
+                            ({\x1+\beamer@technikum@footlinerulemargin}, \y1)
+                            -- ({\x2-\beamer@technikum@footlinerulemargin}, \y2);
+                        \fi
+                    \fi
+                \end{tikzpicture}%
+            \fi%
+        \fi%
+    }
+\fi
+
+% TODO: Customize headline if needed
+% \setbeamertemplate{headline}{...}
 
 \mode<all>

@@ -154,6 +154,44 @@
     \expandafter\setbeamertemplate\expandafter{title page}[\beamer@technikum@title]
 \fi
 
+% =============================================================================
+% TITLE PAGE FRAME NUMBERING
+% =============================================================================
+% Automatically exclude title page from frame numbering
+% The title page frame will be numbered 0, and the next frame will be 1
+\AtBeginDocument{%
+    \addtobeamertemplate{title page}{}{\setcounter{framenumber}{0}}%
+}
+
+% =============================================================================
+% FRAME TITLE / SUBTITLE
+% =============================================================================
+% Create a helper command that returns frametitle or section
+\newcommand{\insertframetitleorsection}{%
+    \@ifundefined{beamer@frametitle}{%
+        \insertsectionhead%
+    }{%
+        \ifx\beamer@frametitle\@empty%
+            \insertsectionhead%
+        \else%
+            \beamer@frametitle%
+        \fi%
+    }%
+}
+
+% Create a helper command that returns framesubtitle or subsection
+\newcommand{\insertframesubtitleorsection}{%
+    \@ifundefined{beamer@shortframesubtitle}{%
+        \insertsubsectionhead%
+    }{%
+        \ifx\beamer@shortframesubtitle\@empty%
+            \insertsubsectionhead%
+        \else%
+            \beamer@shortframesubtitle%
+        \fi%
+    }%
+}
+
 \makeatother
 
 \mode<all>

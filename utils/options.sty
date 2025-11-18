@@ -22,8 +22,93 @@
 \DeclareOptionBeamer{title-institute}{\csname beamer@technikum@showinstitute#1\endcsname}
 \DeclareOptionBeamer{title-date}{\csname beamer@technikum@showdate#1\endcsname}
 
+% ---- Navigation and page numbering options ----
+\newif\ifbeamer@technikum@navigation
+\newif\ifbeamer@technikum@footline
+\newif\ifbeamer@technikum@footlinepagenumber
+\newif\ifbeamer@technikum@footlinerule
+
+\DeclareOptionBeamer{navigation}{\csname beamer@technikum@navigation#1\endcsname}
+\DeclareOptionBeamer{footline}{\csname beamer@technikum@footline#1\endcsname}
+\DeclareOptionBeamer{footline-pagenumber}{\csname beamer@technikum@footlinepagenumber#1\endcsname}
+\DeclareOptionBeamer{footline-rule}{\csname beamer@technikum@footlinerule#1\endcsname}
+
+% Footline rule separator line margin (as dimension)
+\newdimen\beamer@technikum@footlinerulemargin
+\DeclareOptionBeamer{footline-rule-margin}{\setlength{\beamer@technikum@footlinerulemargin}{#1}}
+
+% Footline rule separator line width (as dimension)
+\newdimen\beamer@technikum@footlinerulewidth
+\DeclareOptionBeamer{footline-rule-width}{\setlength{\beamer@technikum@footlinerulewidth}{#1}}
+
+% Footline rule gradient options
+\newif\ifbeamer@technikum@footlinerulegradient
+\DeclareOptionBeamer{footline-rule-gradient}{\csname beamer@technikum@footlinerulegradient#1\endcsname}
+
+% Gradient fade direction for footline rule: east or west
+\def\beamer@technikum@footlinerulegradientdirection{east}
+\DeclareOptionBeamer{footline-rule-gradient-direction}{\def\beamer@technikum@footlinerulegradientdirection{#1}}
+
+% Footline gradient options
+\newif\ifbeamer@technikum@footlinegradient
+\DeclareOptionBeamer{footline-gradient}{\csname beamer@technikum@footlinegradient#1\endcsname}
+
+% Gradient fade direction for footline: east or west
+\def\beamer@technikum@footlinegradientdirection{east}
+\DeclareOptionBeamer{footline-gradient-direction}{\def\beamer@technikum@footlinegradientdirection{#1}}
+
+% ---- Frametitle options ----
+\newif\ifbeamer@technikum@frametitle
+\newif\ifbeamer@technikum@frametitlelogo
+\newif\ifbeamer@technikum@frametitlerule
+
+\DeclareOptionBeamer{frametitle}{\csname beamer@technikum@frametitle#1\endcsname}
+\DeclareOptionBeamer{frametitle-logo}{\csname beamer@technikum@frametitlelogo#1\endcsname}
+\DeclareOptionBeamer{frametitle-rule}{\csname beamer@technikum@frametitlerule#1\endcsname}
+
+% Frametitle rule separator line margin (as dimension)
+\newdimen\beamer@technikum@frametitlerulemargin
+\DeclareOptionBeamer{frametitle-rule-margin}{\setlength{\beamer@technikum@frametitlerulemargin}{#1}}
+
+% Frametitle rule separator line width (as dimension)
+\newdimen\beamer@technikum@frametitlerulewidth
+\DeclareOptionBeamer{frametitle-rule-width}{\setlength{\beamer@technikum@frametitlerulewidth}{#1}}
+
+% Frametitle rule gradient options
+\newif\ifbeamer@technikum@frametitlerulegradient
+\DeclareOptionBeamer{frametitle-rule-gradient}{\csname beamer@technikum@frametitlerulegradient#1\endcsname}
+
+% Gradient fade direction for frametitle rule: east or west
+\def\beamer@technikum@frametitlerulegradientdirection{east}
+\DeclareOptionBeamer{frametitle-rule-gradient-direction}{\def\beamer@technikum@frametitlerulegradientdirection{#1}}
+
+% Logo height as dimension
+\newdimen\beamer@technikum@logoheight
+\DeclareOptionBeamer{logo-height}{\setlength{\beamer@technikum@logoheight}{#1}}
+
+% Logo width option (dimension already defined in title/common.def)
+\DeclareOptionBeamer{logo-width}{\setlength{\beamer@technikum@logowidth}{#1}}
+
+% ---- Frametitle gradient options ----
+\newif\ifbeamer@technikum@frametitlegradient
+\newif\ifbeamer@technikum@framesubtitlegradient
+
+\DeclareOptionBeamer{frametitle-gradient}{\csname beamer@technikum@frametitlegradient#1\endcsname}
+\DeclareOptionBeamer{framesubtitle-gradient}{\csname beamer@technikum@framesubtitlegradient#1\endcsname}
+
+% Gradient fade direction: east (left to right fade), west (right to left fade)
+\def\beamer@technikum@frametitlegradientdirection{east}
+\def\beamer@technikum@framesubtitlegradientdirection{east}
+
+\DeclareOptionBeamer{frametitle-gradient-direction}{\def\beamer@technikum@frametitlegradientdirection{#1}}
+\DeclareOptionBeamer{framesubtitle-gradient-direction}{\def\beamer@technikum@framesubtitlegradientdirection{#1}}
+
 % Set defaults
 \ExecuteOptionsBeamer{%
+    % Global options
+    navigation=false,%
+    logo-height=0.8cm,%
+    % Title page options
     title-background=noir,%
     title-style=general,%
     title-logo=true,%
@@ -32,7 +117,29 @@
     title-author=true,%
     title-email=true,%
     title-institute=true,%
-    title-date=true%
+    title-date=true,%
+    % Frametitle options
+    frametitle=true,%
+    frametitle-logo=true,%
+    frametitle-gradient=false,%
+    frametitle-gradient-direction=east,%
+    framesubtitle-gradient=false,%
+    framesubtitle-gradient-direction=east,%
+    frametitle-rule=true,%
+    frametitle-rule-margin=0em,%
+    frametitle-rule-width=0.4pt,%
+    frametitle-rule-gradient=false,%
+    frametitle-rule-gradient-direction=east,%
+    % Footline options
+    footline=true,%
+    footline-pagenumber=true,%
+    footline-gradient=false,%
+    footline-gradient-direction=east,%
+    footline-rule=true,%
+    footline-rule-margin=0em,%
+    footline-rule-width=0.4pt,%
+    footline-rule-gradient=false,%
+    footline-rule-gradient-direction=east%
 }
 
 \ProcessOptionsBeamer\relax
