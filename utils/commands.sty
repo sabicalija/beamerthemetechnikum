@@ -40,28 +40,14 @@
     \fi
 }
 
-% Helper command to set a coordinate to the first defined node from a list
-% Usage:
-%   \setfirstdefined{varname}{node1,node2,node3,...}
-%
-% Sets \varname to the first node from the comma-separated list that is defined (exists)
-% If no nodes exist, sets it to the last item in the list (fallback)
-%
-% Examples:
-%   \setfirstdefined{authoranchor}{subtitle,title,current page.center}
-%   % Then use: below=of \authoranchor
-%
-\newcommand{\setfirstdefined}[2]{%
-    \def\tempresult{}%
-    \foreach \nodename in {#2}{%
-            \ifx\tempresult\@empty
-                \ifcsname pgf@sh@ns@\nodename\endcsname
-                    \xdef#1{\nodename}%
-                    \xdef\tempresult{found}%
-                \else
-                    \xdef#1{\nodename}% Keep updating as fallback
-                \fi
-            \fi
-        }%
+% =============================================================================
+% PDF STRING FIXES
+% =============================================================================
+% Fix for \translate command in PDF bookmarks (e.g. Appendix, References)
+% hyperref cannot handle \translate in bookmarks, so we define a fallback
+\pdfstringdefDisableCommands{%
+    \def\translate#1{#1}%
 }
+
+\endinput
 

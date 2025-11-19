@@ -6,10 +6,20 @@
 
 % ---- Font setup (fontspec for XeLaTeX) ----
 \RequirePackage{fontspec}
+\RequirePackage{unicode-math}
 
+% Math font must be set first (unicode-math requirement)
+\setmathfont{Noto Sans Math}
+% Alternative math fonts:
+% \setmathfont{Latin Modern Math}
+% \setmathfont{STIX Two Math}
+% \setmathfont{XITS Math}
+% \setmathfont{TeX Gyre Pagella Math}
+% \setmathfont{TeX Gyre Termes Math}
+% \setmathfont{TeX Gyre Schola Math}
+% \setmathfont{Asana Math}
 
-% Main font (serif)
-% For serif text
+% Text fonts
 \setmainfont{Noto Serif}
 % \setmainfont{DejaVu Serif} % classic
 % \setmainfont{Georgia} % readable serif
@@ -28,18 +38,6 @@
 % \setmonofont{DejaVu Sans Mono} % very readable
 % \setmonofont{Courier New} % classic
 % \setmonofont{Ubuntu Mono} % modern
-
-% Math font
-\RequirePackage{unicode-math}
-\setmathfont{Noto Sans Math}
-% \setmathfont{Latin Modern Math}
-% \setmathfont{STIX Two Math}
-% \setmathfont{XITS Math}
-% \setmathfont{TeX Gyre Pagella Math}
-% \setmathfont{TeX Gyre Termes Math}
-% \setmathfont{TeX Gyre Schola Math}
-% \setmathfont{Asana Math}
-% \setmathfont{Asana-Math.otf}[Path=/usr/local/texlive/2025/texmf-dist/fonts/opentype/public/asana-math/]
 
 % Set sans as default for presentation
 \renewcommand{\familydefault}{\sfdefault}
