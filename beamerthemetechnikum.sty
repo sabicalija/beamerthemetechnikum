@@ -1,27 +1,27 @@
 % Beamer Theme Technikum
 % Main theme file for Fachhochschule Technikum Wien
+\ProvidesPackage{beamerthemetechnikum}[2025/11/18 Technikum Wien Beamer Theme]
 
 \mode<presentation>
 
-% Load dependencies
 \RequirePackage{tikz}
 \RequirePackage{ifthen}
 \RequirePackage[european, siunitx]{circuitikz}
 
-% Load theme options
+% Load theme options and commands
 \input{utils/options.sty}
-
-% Load custom commands
 \input{utils/commands.sty}
+\input{utils/colors.sty}
 
-% Load component themes
+% Load TikZ and CircuiTikz configurations
+\input{utils/tikz-config.sty}
+% Load CircuiTikz configurations
+\input{utils/circuitikz-config.sty}
+
+% Load theme components
 \usecolortheme{technikum}
 \usefonttheme{technikum}
 \useinnertheme{technikum}
 \useoutertheme{technikum}
-
-% Load TikZ and CircuiTikz configurations
-\input{utils/tikz-config.sty}
-\input{utils/circuitikz-config.sty}
 
 \mode<all>
