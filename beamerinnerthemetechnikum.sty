@@ -11,7 +11,7 @@
 \makeatletter
 
 % ---- Global paragraph spacing ----
-\setlength{\parskip}{0.5em plus 0.2em minus 0.1em}  % Space between paragraphs
+\setlength{\parskip}{0.5em plus 0.2em minus 0.3em}  % Space between paragraphs
 \setlength{\parindent}{0pt}                          % No paragraph indentation
 
 % ---- List spacing (itemize/enumerate) ----
@@ -23,19 +23,19 @@
     \leftmargin\leftmargini
     \parsep 0pt                                      % No extra space between paragraphs in items
     \topsep 0.3em plus 0.2em minus 0.1em            % Space before/after list
-    \itemsep 0.4em plus 0.2em minus 0.1em           % Space between 1st level items
+    \itemsep 0.4em plus 0.2em minus 0.2em           % Space between 1st level items
 }
 \def\@listii{%
     \leftmargin\leftmarginii
     \parsep 0pt
     \topsep 0.2em                                    % Space before/after nested list
-    \itemsep 0.5em plus 0.3em minus 0.1em           % Space between 2nd level items (increased)
+    \itemsep 0.5em plus 0.3em minus 0.3em           % Space between 2nd level items (increased)
 }
 \def\@listiii{%
     \leftmargin\leftmarginiii
     \parsep 0pt
     \topsep 0.2em
-    \itemsep 0.4em plus 0.2em minus 0.1em           % Space between 3rd level items
+    \itemsep 0.4em plus 0.2em minus 0.2em           % Space between 3rd level items
 }
 
 % Activate the list spacing definitions
@@ -50,30 +50,30 @@
 % ---- Block environment spacing ----
 % Space inside and around blocks (definition, theorem, example, etc.)
 \addtobeamertemplate{block begin}{}{%
-    \setlength{\parskip}{0.5em plus 0.2em minus 0.1em}      % Between paragraphs inside blocks
-    \setlength{\itemsep}{0.4em plus 0.2em minus 0.1em}      % Between items inside blocks
+    \setlength{\parskip}{0.5em plus 0.2em minus 0.3em}      % Between paragraphs inside blocks
+    \setlength{\itemsep}{0.4em plus 0.2em minus 0.2em}      % Between items inside blocks
     % Override list spacing for lists inside blocks
     \def\@listi{%
         \leftmargin\leftmargini
         \parsep 0pt
         \topsep 0.3em plus 0.2em minus 0.1em
-        \itemsep 0.6em plus 0.3em minus 0.1em               % 1st level in blocks
+        \itemsep 0.6em plus 0.3em minus 0.4em               % 1st level in blocks
     }%
     \def\@listii{%
         \leftmargin\leftmarginii
         \parsep 0pt
         \topsep 0.2em
-        \itemsep 0.6em plus 0.3em minus 0.1em               % 2nd level in blocks
+        \itemsep 0.6em plus 0.3em minus 0.4em               % 2nd level in blocks
     }%
     \def\@listiii{%
         \leftmargin\leftmarginiii
         \parsep 0pt
         \topsep 0.2em
-        \itemsep 0.5em plus 0.2em minus 0.1em               % 3rd level in blocks
+        \itemsep 0.5em plus 0.2em minus 0.3em               % 3rd level in blocks
     }%
 }
 \addtobeamertemplate{block end}{}{%
-    \vspace{0.5em plus 0.2em minus 0.1em}                   % After blocks
+    \vspace{0.5em plus 0.2em minus 0.3em}                   % After blocks
 }
 
 % ---- Frame margins ----
