@@ -29,19 +29,45 @@
     % Add arrow styles here as needed
 }
 
+\RequirePackage{eqparbox}
+\newcounter{legendid}
+
+% Syntax: \lentry[<optional fixed width>]{<label>}{<text>}
+\NewDocumentCommand{\lentry}{ o m m }{%
+    \IfNoValueTF{#1}{%
+        % 1. Make the box exactly as wide as the widest label (no padding inside)
+        \eqmakebox[legend\thelegendid][l]{#2}%
+        % 2. Add the padding rigidly AFTER the box
+        \hspace{0.5em}% 
+    }{%
+        \makebox[#1][l]{#2}%
+    }%
+    #3%
+}
+
+\newenvironment{variables}{
+    \stepcounter{legendid}
+    \begin{itemize}
+        }{
+    \end{itemize}
+}
+
 % Diagram-specific styles
 \tikzset{
     % Add custom diagram styles here as needed
     legend/.style={
-            font=\scriptsize,
-            align=left,
-            node distance=-0.25em,
-            text width=9em,
-            show background rectangle,
-            inner frame xsep=1em,
-            inner frame ysep=1em,
-            background rectangle/.style={draw=none, fill=none},
-            every node/.style={below=of current bounding box.south}
+            execute at begin scope={\stepcounter{legendid}},
+            every node/.style={
+                    node distance=0em,
+                    align=left,
+                    font=\scriptsize,
+                    below=of current bounding box.south west,
+                    anchor=north west,
+                    inner sep = 0em,
+                    text depth = 0.25em,
+                    text height = 0.75em,
+                    execute at begin node={\hspace*{1em}},
+                }
         }
 }
 
