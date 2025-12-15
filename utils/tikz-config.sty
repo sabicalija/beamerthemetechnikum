@@ -32,6 +32,17 @@
 % Diagram-specific styles
 \tikzset{
     % Add custom diagram styles here as needed
+    legend/.style={
+            font=\scriptsize,
+            align=left,
+            node distance=-0.25em,
+            text width=9em,
+            show background rectangle,
+            inner frame xsep=1em,
+            inner frame ysep=1em,
+            background rectangle/.style={draw=none, fill=none},
+            every node/.style={below=of current bounding box.south}
+        }
 }
 
 \endinput
