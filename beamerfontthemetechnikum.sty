@@ -9,7 +9,10 @@
 \RequirePackage{unicode-math}
 
 % Math font must be set first (unicode-math requirement)
-\setmathfont{Noto Sans Math}
+\setmathfont{NotoSansMath-Regular}[
+    Extension = .ttf
+    ]
+% \setmathfont{Noto Sans Math}
 % Alternative math fonts:
 % \setmathfont{Latin Modern Math}
 % \setmathfont{STIX Two Math}
@@ -20,21 +23,40 @@
 % \setmathfont{Asana Math}
 
 % Text fonts
-\setmainfont{Noto Serif}
+\setmainfont{NotoSerif}[
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic
+    ]
+% \setmainfont{Noto Serif}
 % \setmainfont{DejaVu Serif} % classic
 % \setmainfont{Georgia} % readable serif
 % \setmainfont{Latin Modern Roman} % LaTeX default, professional
 
 % Sans-serif font (Beamer default for presentations)
 % Main presentation font
-\setsansfont{Noto Sans} % modern, comprehensive
+\setsansfont{NotoSans}[
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic
+    ]
+% \setsansfont{Noto Sans} % modern, comprehensive
 % \setsansfont{DejaVu Sans} % clean, readable
 % \setsansfont{Arial} % classic
 % \setsansfont{Ubuntu Sans} % modern, friendly
 
 % Monospace font
 % For code
-\setmonofont{Noto Sans Mono} % clean
+\setmonofont{NotoSansMono}[
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold
+    ]
+% \setmonofont{Noto Sans Mono} % clean
 % \setmonofont{DejaVu Sans Mono} % very readable
 % \setmonofont{Courier New} % classic
 % \setmonofont{Ubuntu Mono} % modern
