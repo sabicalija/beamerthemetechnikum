@@ -4,21 +4,28 @@
 
 \mode<presentation>
 
-\RequirePackage{tikz}
-\RequirePackage{ifthen}
-\RequirePackage[european, siunitx]{circuitikz}
+% --- Packages ---
 
-% Load theme options and commands
+\RequirePackage{tikz}
+\RequirePackage{ifthen}                                         % theme option logic
+\RequirePackage[european, siunitx]{circuitikz}
+\RequirePackage[cache=true]{minted}
+\RequirePackage[skip=0.25em, justification=centering]{caption}  % numbered captions
+
+% --- Theme options and utilities ---
+
 \input{utils/options.sty}
 \input{utils/commands.sty}
 \input{utils/colors.sty}
 
-% Load TikZ and CircuiTikz configurations
-\input{utils/tikz-config.sty}
-% Load CircuiTikz configurations
-\input{utils/circuitikz-config.sty}
+% --- Package configurations ---
 
-% Load theme components
+\input{config/tikz.cfg}
+\input{config/circuitikz.cfg}
+\input{config/minted.cfg}
+
+% --- Theme components ---
+
 \usecolortheme{technikum}
 \usefonttheme{technikum}
 \useinnertheme{technikum}
