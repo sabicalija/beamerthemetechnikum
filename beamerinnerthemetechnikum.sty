@@ -77,8 +77,173 @@
 }
 
 % ---- Frame margins ----
-\setbeamersize{text margin left=1em}   % Left margin
-\setbeamersize{text margin right=1em}  % Right margin
+\setbeamersize{text margin left=1em}
+\setbeamersize{text margin right=1em}
+
+% =============================================================================
+% BLOCK TEMPLATES
+% =============================================================================
+\setbeamertemplate{block begin}{
+    \ifx\insertblocktitle\@empty
+    \begin{tcolorbox}[
+        colframe=fhtw-green,
+        coltitle=white,
+        colbacktitle=fhtw-green!95!black,
+        colback=fhtw-green!5,
+        boxrule=1pt,
+        arc=0.2em,
+        outer arc=0.2em,
+        left=0.5em, right=0.5em, top=0.5em, bottom=0.5em, % Internal body padding
+        boxsep=0pt,
+        before upper={
+                \setlength{\parskip}{0.5em plus 0.2em minus 0.3em}%
+                \setlength{\itemsep}{0.4em plus 0.2em minus 0.2em}%
+                \def\@listi{\leftmargin\leftmargini \parsep 0pt \topsep 0.3em plus 0.2em minus 0.1em \itemsep 0.6em plus 0.3em minus 0.4em}%
+                \def\@listii{\leftmargin\leftmarginii \parsep 0pt \topsep 0.2em \itemsep 0.6em plus 0.3em minus 0.4em}%
+                \def\@listiii{\leftmargin\leftmarginiii \parsep 0pt \topsep 0.2em \itemsep 0.5em plus 0.2em minus 0.3em}%
+            }
+    ]
+    \else
+    \begin{tcolorbox}[
+            colframe=fhtw-green,
+            coltitle=white,
+            colbacktitle=fhtw-green!95!black,
+            colback=fhtw-green!5,
+            fonttitle=\usebeamerfont{block title},
+            title=\insertblocktitle,
+            boxrule=1pt,
+            arc=0.2em,
+            outer arc=0.2em,
+            left=0.5em, right=0.5em, top=0.5em, bottom=0.5em,
+            toptitle=0.25ex, bottomtitle=0.25ex,
+            boxsep=0pt,
+            before upper={
+                    \setlength{\parskip}{0.5em plus 0.2em minus 0.3em}%
+                    \setlength{\itemsep}{0.4em plus 0.2em minus 0.2em}%
+                    \def\@listi{\leftmargin\leftmargini \parsep 0pt \topsep 0.3em plus 0.2em minus 0.1em \itemsep 0.6em plus 0.3em minus 0.4em}%
+                    \def\@listii{\leftmargin\leftmarginii \parsep 0pt \topsep 0.2em \itemsep 0.6em plus 0.3em minus 0.4em}%
+                    \def\@listiii{\leftmargin\leftmarginiii \parsep 0pt \topsep 0.2em \itemsep 0.5em plus 0.2em minus 0.3em}%
+                }
+        ]
+        \fi
+        \usebeamerfont{block body}%
+        }
+
+        \setbeamertemplate{block end}{
+    \end{tcolorbox}
+}
+
+% =============================================================================
+% ALERT BLOCK TEMPLATES
+% =============================================================================
+\setbeamertemplate{block alerted begin}{
+    \ifx\insertblocktitle\@empty
+    \begin{tcolorbox}[
+        colframe=red,
+        coltitle=white,
+        colbacktitle=red!95!black,
+        colback=red!5,
+        boxrule=1pt,
+        arc=0.2em,
+        outer arc=0.2em,
+        left=0.5em, right=0.5em, top=0.5em, bottom=0.5em,
+        boxsep=0pt,
+        before upper={
+                \setlength{\parskip}{0.5em plus 0.2em minus 0.3em}%
+                \setlength{\itemsep}{0.4em plus 0.2em minus 0.2em}%
+                \def\@listi{\leftmargin\leftmargini \parsep 0pt \topsep 0.3em plus 0.2em minus 0.1em \itemsep 0.6em plus 0.3em minus 0.4em}%
+                \def\@listii{\leftmargin\leftmarginii \parsep 0pt \topsep 0.2em \itemsep 0.6em plus 0.3em minus 0.4em}%
+                \def\@listiii{\leftmargin\leftmarginiii \parsep 0pt \topsep 0.2em \itemsep 0.5em plus 0.2em minus 0.3em}%
+                \setbeamercolor{itemize item}{fg=red!90!black}%
+                \setbeamercolor{itemize subitem}{fg=red!80!black}%
+                \setbeamercolor{itemize subsubitem}{fg=red!70!black}%
+            }
+    ]
+    \else
+    \begin{tcolorbox}[
+            colframe=red,
+            coltitle=white,
+            colbacktitle=red!95!black,
+            colback=red!5,
+            fonttitle=\usebeamerfont{block title alerted},
+            title=\insertblocktitle,
+            boxrule=1pt,
+            arc=0.2em,
+            outer arc=0.2em,
+            left=0.5em, right=0.5em, top=0.5em, bottom=0.5em,
+            toptitle=0.25ex, bottomtitle=0.25ex,
+            boxsep=0pt,
+            before upper={
+                    \setlength{\parskip}{0.5em plus 0.2em minus 0.3em}%
+                    \setlength{\itemsep}{0.4em plus 0.2em minus 0.2em}%
+                    \def\@listi{\leftmargin\leftmargini \parsep 0pt \topsep 0.3em plus 0.2em minus 0.1em \itemsep 0.6em plus 0.3em minus 0.4em}%
+                    \def\@listii{\leftmargin\leftmarginii \parsep 0pt \topsep 0.2em \itemsep 0.6em plus 0.3em minus 0.4em}%
+                    \def\@listiii{\leftmargin\leftmarginiii \parsep 0pt \topsep 0.2em \itemsep 0.5em plus 0.2em minus 0.3em}%
+                    \setbeamercolor{itemize item}{fg=red!90!black}%
+                    \setbeamercolor{itemize subitem}{fg=red!80!black}%
+                    \setbeamercolor{itemize subsubitem}{fg=red!70!black}%
+                }
+        ]
+        \fi
+        \usebeamerfont{block body alerted}
+        }
+
+        \setbeamertemplate{block alerted end}{
+    \end{tcolorbox}
+}
+
+% =============================================================================
+% EXAMPLE BLOCK TEMPLATES
+% =============================================================================
+\setbeamertemplate{block example begin}{
+    \ifx\insertblocktitle\@empty
+    \begin{tcolorbox}[
+        colframe=fhtw-blue,
+        coltitle=white,
+        colbacktitle=fhtw-blue!95!black,
+        colback=fhtw-blue!5,
+        boxrule=1pt,
+        arc=0.2em,
+        outer arc=0.2em,
+        left=0.5em, right=0.5em, top=0.5em, bottom=0.5em,
+        boxsep=0pt,
+        before upper={
+                \setlength{\parskip}{0.5em plus 0.2em minus 0.3em}%
+                \setlength{\itemsep}{0.4em plus 0.2em minus 0.2em}%
+                \def\@listi{\leftmargin\leftmargini \parsep 0pt \topsep 0.3em plus 0.2em minus 0.1em \itemsep 0.6em plus 0.3em minus 0.4em}%
+                \def\@listii{\leftmargin\leftmarginii \parsep 0pt \topsep 0.2em \itemsep 0.6em plus 0.3em minus 0.4em}%
+                \def\@listiii{\leftmargin\leftmarginiii \parsep 0pt \topsep 0.2em \itemsep 0.5em plus 0.2em minus 0.3em}%
+            }
+    ]
+    \else
+    \begin{tcolorbox}[
+            colframe=fhtw-blue,
+            coltitle=white,
+            colbacktitle=fhtw-blue!95!black,
+            colback=fhtw-blue!5,
+            fonttitle=\usebeamerfont{block title example},
+            title=\insertblocktitle,
+            boxrule=1pt,
+            arc=0.2em,
+            outer arc=0.2em,
+            left=0.5em, right=0.5em, top=0.5em, bottom=0.5em,
+            toptitle=0.25ex, bottomtitle=0.25ex,
+            boxsep=0pt,
+            before upper={
+                    \setlength{\parskip}{0.5em plus 0.2em minus 0.3em}%
+                    \setlength{\itemsep}{0.4em plus 0.2em minus 0.2em}%
+                    \def\@listi{\leftmargin\leftmargini \parsep 0pt \topsep 0.3em plus 0.2em minus 0.1em \itemsep 0.6em plus 0.3em minus 0.4em}%
+                    \def\@listii{\leftmargin\leftmarginii \parsep 0pt \topsep 0.2em \itemsep 0.6em plus 0.3em minus 0.4em}%
+                    \def\@listiii{\leftmargin\leftmarginiii \parsep 0pt \topsep 0.2em \itemsep 0.5em plus 0.2em minus 0.3em}%
+                }
+        ]
+        \fi
+        \usebeamerfont{block body example}% Correct font key
+        }
+
+        \setbeamertemplate{block example end}{
+    \end{tcolorbox}
+}
 
 % =============================================================================
 % ITEMIZE BULLET SYMBOLS

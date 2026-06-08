@@ -2,15 +2,19 @@
 % Main theme file for Fachhochschule Technikum Wien
 \ProvidesPackage{beamerthemetechnikum}[2025/11/18 Technikum Wien Beamer Theme]
 
+\input{utils/silencio.sty}
+
 \mode<presentation>
 
 % --- Packages ---
 
+\RequirePackage{mathtools}
 \RequirePackage{tikz}
-\RequirePackage{ifthen}                                         % theme option logic
+\RequirePackage{ifthen}                                        % theme option logic
 \RequirePackage[european, siunitx]{circuitikz}
 \RequirePackage[cache=true]{minted}
-\RequirePackage[skip=0.25em, justification=centering]{caption}  % numbered captions
+\RequirePackage[skip=0.25em, justification=centering]{caption} % numbered captions
+\RequirePackage{tcolorbox}                                     % for custom block styles
 
 % --- Theme options and utilities ---
 
@@ -25,6 +29,7 @@
 \input{config/circuitikz.cfg}
 \input{config/minted.cfg}
 \input{config/algorithm2e.cfg}
+\input{config/tcb.cfg}
 
 % --- Theme components ---
 

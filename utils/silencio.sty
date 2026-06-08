@@ -1,0 +1,11 @@
+\usepackage{silence}
+
+% unicode-math: Das sind oft mehrzeilige Warnungen, 
+% daher filtern wir nur das eindeutige Schlüsselwort.
+\WarningFilter{unicode-math}{Using \overbracket}
+\WarningFilter{unicode-math}{I'm going to overwrite}
+
+% siunitx: Wir filtern nach "Detected the 'physics' package"
+\WarningFilter{siunitx}{Detected the "physics"}
+
+% pgfplots: Wenn du den Kompatibilitäts-Fix unten machst, brauchst du das nicht mehr.
