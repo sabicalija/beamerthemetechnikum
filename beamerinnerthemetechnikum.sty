@@ -86,6 +86,7 @@
 \setbeamertemplate{block begin}{
     \ifx\insertblocktitle\@empty
     \begin{tcolorbox}[
+        enhanced,
         colframe=fhtw-green,
         coltitle=white,
         colbacktitle=fhtw-green!95!black,
@@ -105,11 +106,13 @@
     ]
     \else
     \begin{tcolorbox}[
+            enhanced,
             colframe=fhtw-green,
             coltitle=white,
             colbacktitle=fhtw-green!95!black,
             colback=fhtw-green!5,
-            fonttitle=\usebeamerfont{block title},
+            % fonttitle=\usebeamerfont{block title},
+            fonttitle=\usebeamerfont{block title}\vphantom{Äg},
             title=\insertblocktitle,
             boxrule=1pt,
             arc=0.2em,
@@ -139,6 +142,7 @@
 \setbeamertemplate{block alerted begin}{
     \ifx\insertblocktitle\@empty
     \begin{tcolorbox}[
+        enhanced,
         colframe=red,
         coltitle=white,
         colbacktitle=red!95!black,
@@ -161,6 +165,7 @@
     ]
     \else
     \begin{tcolorbox}[
+            enhanced,
             colframe=red,
             coltitle=white,
             colbacktitle=red!95!black,
@@ -198,6 +203,7 @@
 \setbeamertemplate{block example begin}{
     \ifx\insertblocktitle\@empty
     \begin{tcolorbox}[
+        enhanced,
         colframe=fhtw-blue,
         coltitle=white,
         colbacktitle=fhtw-blue!95!black,
@@ -217,6 +223,7 @@
     ]
     \else
     \begin{tcolorbox}[
+            enhanced,
             colframe=fhtw-blue,
             coltitle=white,
             colbacktitle=fhtw-blue!95!black,
