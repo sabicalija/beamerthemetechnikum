@@ -49,5 +49,19 @@
     \def\translate#1{#1}%
 }
 
+% =============================================================================
+% APPENDIX FRAME NUMBERING FIX
+% =============================================================================
+% Fix for appendix frame numbering in Beamer presentations
+% This ensures that the total frame count is correctly displayed in the footer
+\let\orig@appendix\appendix
+\renewcommand{\appendix}{%
+	% Save the last frame number before the appendix to the .aux file
+	\immediate\write\@auxout{\string\@writefile{nav}{\noexpand\headcommand{\noexpand\def\noexpand\insertmainframetotal{\the\value{framenumber}}}}}%
+	\orig@appendix%
+}
+% Provide a default if before the first compile pass
+\providecommand{\insertmainframetotal}{\inserttotalframenumber}
+
 \endinput
 

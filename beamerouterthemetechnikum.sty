@@ -220,7 +220,7 @@
                     \node[footline node, anchor=south, align=center, text width=0.3333\dimexpr\paperwidth-2em\relax] (title) at (0.5\paperwidth, 0) {%
                         \usebeamerfont{title in head/foot}%
                         \usebeamercolor[fg]{title in head/foot}%
-                        \insertshorttitle%
+                        \beamer@shorttitle%
                     };
 
                     % Page Number (Right)
@@ -228,6 +228,7 @@
                         \ifbeamer@technikum@footlinepagenumber
                             \usebeamerfont{page number in head/foot}%
                             \usebeamercolor[fg]{page number in head/foot}%
+                            % \insertframenumber\,/\,\insertpresentationendpage%
                             \insertframenumber\,/\,\inserttotalframenumber%
                         \fi
                     };
